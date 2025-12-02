@@ -13,4 +13,41 @@ class Api {
       );
     }
   }
+
+  Future<dynamic> post({
+    required String url,
+    dynamic body,
+  }) async {
+    http.Response response = await http.post(
+      Uri.parse(url),
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception(
+        'there an  problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}',
+      );
+    }
+  }
+
+  Future<dynamic> put({
+    required String url,
+    dynamic body,
+  }) async {
+    http.Response response = await http.put(
+      Uri.parse(url),
+      body: body,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception(
+        'there an  problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}',
+      );
+    }
+  }
 }
